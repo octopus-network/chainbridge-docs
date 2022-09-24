@@ -2,8 +2,8 @@
 ## Prerequisites
 
 - Docker, docker-compose
-- chainbridge `v1.1.1` binary (see [README](https://github.com/chainsafe/chainbridge/#building))
-- cb-sol-cli (see [README](https://github.com/ChainSafe/chainbridge-deploy/tree/master/cb-sol-cli#cb-sol-cli-documentation))
+- chainbridge binary (see [Install](installation.md))
+- cb-sol-cli (see [README](https://github.com/octopus-network/chainbridge-deploy/blob/oct-dev/cb-sol-cli/README.md))
 
 ## Steps To Get Started
 1. [`Start Local Chains`](#start-local-chains)
@@ -18,14 +18,12 @@
 10. [`Fungible Transfers`](#fungible-transfers)
 11. [`Non-Fungible Transfers`](#non-fungible-transfers)
 
-## Start Local Chains
+## Start Geth Chain
 
 The easiest way to get started is to use the below docker-compose snippet. 
 
-This will start one geth instance and an instance of chainbridge-substrate-chain:
+This will start one or two geth instance:
 ```yaml
-# Copyright 2020 ChainSafe Systems
-# SPDX-License-Identifier: LGPL-3.0-only
 
 version: '3'
 services:
@@ -33,23 +31,29 @@ services:
     image: "chainsafe/chainbridge-geth:20200505131100-5586a65"
     container_name: geth1
     ports:
-    - "8545:8545"
+      - "8545:8545"
 
-  sub-chain:
-    image: "chainsafe/chainbridge-substrate-chain:v1.3.0"
-    container_name: sub-chain
-    command: chainbridge-substrate-chain --dev --alice --ws-external --rpc-external
+  geth2:
+    image: "chainsafe/chainbridge-geth:20200505131100-5586a65"
+    container_name: geth2
     ports:
-    - "9944:9944"
+      - "8546:8545"
 ```
 
 _Start Chains:_
 ```bash
-docker-compose -f docker-compose-snippet.yml up -V
+docker-compose -f docker-compose-2-geth.yml up -V
 ```
 
 (Use `-V` to always start with new chains. These instructions depend on deterministic Ethereum addresses, which are used as defaults implicitly by some of these commands. Avoid re-deploying the contracts without restarting both chains, or ensure to specify all the required parameters.)
 
+## Start subsrate chain
+```
+git clone git@github.com:octopus-network/barnacle.git
+git checkout feature/add-chainbridge-v1
+cargo build --release
+./target/release/appchain-barnacle   --dev  --tmp --alice --ws-external --rpc-external --enable-offchain-indexing true
+```
 ## Connect to PolkadotJS Portal
 
 1. Access the PolkadotJS Portal for Centrifuge, as an example Substrate chain, [here](https://portal.chain.centrifuge.io/)
@@ -85,7 +89,6 @@ docker-compose -f docker-compose-snippet.yml up -V
   "LookupSource": "AccountId"
 }
 ```
-* These can be found found [here](https://github.com/ChainSafe/chainbridge-Substrate-chain#polkadot-js-apps)
 
 ## On-Chain Setup (Ethereum)
 ### Deploy Contracts
@@ -222,35 +225,29 @@ Steps to whitelist chains:
 
 Steps to run a relayer:
 
-1. Clone the [ChainBridge repository](https://github.com/ChainSafe/ChainBridge)
+1. Clone the [ChainBridge repository](https://github.com/octopus-network/ChainBridge)
 2. Install the ChainBridge binary
 3. Create `config.json` using the sample provided below as a starting point
 4. Start relayer as a binary using the default "Alice" key
 
 _Clone repo:_
 ```bash
-git clone git@github.com:ChainSafe/ChainBridge.git
+git clone git@github.com:octopus-network/ChainBridge.git
+
 ```
 _Build ChainBridge and move it to your GOBIN path:_
 ```bash
-cd ChainBridge && make install
+
+cd ChainBridge 
+# switch to oct-dev branch
+git checkout oct-dev
+make install
 ```
 _Run relayer_:
 ```bash
-chainbridge --config config.json --testkey alice --latest
+chainbridge --config config.json --testkey alice --verbosity trace --latest
 ```
 
-_Or, if you prefer Docker, steps 2 and 4 can be done as follows:_
-
-Build the ChainBridge docker image:
-```bash
-docker build -t chainsafe/chainbridge .
-```
-
-Start the relayer as a docker container:
-```bash
-docker run -v (pwd)/config.json:/config.json --network host chainsafe/chainbridge --testkey alice --latest 
-```
 
 Sample `config.json`:
 ```json
@@ -294,7 +291,7 @@ Steps to transfer an ERC-20 token:
 
 1. Select the `Extrinsics` tab in the PolkadotJS Portal
 2. Call `example.transferNative` with parameters such as these:
-    - Amount: `1000` **(select `Pico` for units)**
+    - Amount: `500000000000000000000 `
     - Recipient: `0xff93B45308FD417dF303D6515aB04D9e89a750Ca`
     - Dest Id: `0`
 

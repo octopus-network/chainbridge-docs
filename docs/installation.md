@@ -1,5 +1,11 @@
 # Installation
 
+## Clone Source Code
+```
+git clone git@github.com:octopus-network/ChainBridge.git
+# switch to oct-dev branch
+git checkout oct-dev
+```
 ## Dependencies
 
 - [Subkey](https://github.com/paritytech/substrate): 
@@ -23,20 +29,4 @@ Use`go install` to add `chainbridge` to your GOBIN.
 
 ```
 make install
-```
-
-## Docker
-
-The official ChainBridge Docker image can be found [here](https://hub.docker.com/r/chainsafe/chainbridge).
-
-To build the Docker image locally run: 
-
-```
-docker build -t chainsafe/chainbridge .
-```
-
-To start ChainBridge:
-
-```
-docker run -v $(pwd)/config.json:/config.json chainsafe/chainbridge
 ```

@@ -196,9 +196,11 @@ In configuring the destination bridge contract we set the relayer threshold to 1
 #### 1. Build the relayer
 
 ```shell
-git clone -b v1.1.1 --depth 1 https://github.com/ChainSafe/chainbridge \
-&& cd chainbridge \
-&& make build
+git clone git@github.com:octopus-network/ChainBridge.git
+&& cd chainbridge 
+# switch to oct-dev branch
+git checkout oct-dev
+make build
 ```
 
 #### 2. Author a config
@@ -329,6 +331,6 @@ cb-sol-cli --url $DST_GATEWAY --privateKey $DST_PK --gasPrice 10000000000 erc20 
 
 It is also simple to extend the above to work with non-fungible assets (e.g. ERC721) by deploying another handler contract and reconfiguring the bridge.
 
-Of course having a single relayer is a highly centralised way to be running the bridge. With additional calls to [`add-relayer`](https://github.com/ChainSafe/chainbridge-deploy/blob/v1.0.0/cb-sol-cli/docs/admin.md#add-relayer) it is easy to set up extra accounts that can relay simultaneuosly. Once there are plenty of relayers you can increase the vote threshold so that a certain number of relayers need to agree on a proposal before it is executed.
+Of course having a single relayer is a highly centralised way to be running the bridge. With additional calls to [`add-relayer`](https://github.com/octopus-network/chainbridge-deploy/blob/oct-dev/cb-sol-cli/docs/admin.md#add-relayer) it is easy to set up extra accounts that can relay simultaneuosly. Once there are plenty of relayers you can increase the vote threshold so that a certain number of relayers need to agree on a proposal before it is executed.
 
-Read the [documentation for the CLI tool](https://github.com/ChainSafe/chainbridge-deploy/blob/release/v1.0.0/cb-sol-cli/README.md) to see how the bridge contract and handlers can be configured for different scenarios.
+Read the [documentation for the CLI tool](https://github.com/octopus-network/chainbridge-deploy/blob/oct-dev/cb-sol-cli/README.md) to see how the bridge contract and handlers can be configured for different scenarios.

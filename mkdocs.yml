@@ -1,11 +1,11 @@
-# Copyright 2020 ChainSafe Systems
+# Copyright 2022 Octopus Network
 # SPDX-License-Identifier: LGPL-3.0-only
 
 site_name: ChainBridge Docs
 site_description: Modular Multi-Directional Blockchain Bridge to interact with Multiple Networks; Ethereum, Ethereum Classic, Substrate, Cosmos-SDK based chains.
 
-repo_name: chainsafe/chainbridge
-repo_url: https://github.com/ChainSafe/chainbridge
+repo_name: octopus/chainbridge
+repo_url: https://github.com/octopus-network/ChainBridge
 
 # Configuration
 markdown_extensions:
@@ -22,27 +22,23 @@ theme:
   favicon: img/favicon.ico
 nav:
   - Overview: index.md
-  - Installation: installation.md
-  - Configuration:
-    - Overview: configuration.md
-    - CLI Options: cli-options.md
   - Specification:
       - ChainBridge: spec.md
       - Ethereum:
-        - Bridge Setup: chains/ethereum.md
-        - Contracts: chains/eth-contracts.md
+          - Bridge Setup: chains/ethereum.md
+          - Contracts: chains/eth-contracts.md
       - Substrate: chains/substrate.md
-  - Guides:
-    - Running Locally (EVM <-> Substrate): local.md
-    - Deploying Live (EVM <-> EVM): live-evm-bridge.md
+  - Deploy & Test Guides:
+      - Install & config Relayer:
+          - Installation: installation.md
+          - Configuration:
+              - Overview: configuration.md
+              - CLI Options: cli-options.md
+      - Running Locally (EVM <-> Sub): local.md
+      - Deploying Live (EVM <-> EVM): live-evm-bridge.md
   - FAQ: faq.md
-  - Testing: test.md
-  - Releases:
-      - Relayer: https://github.com/ChainSafe/ChainBridge/tags
-      - Solidity: https://github.com/ChainSafe/chainbridge-solidity/tags
-
 
 extra:
   social:
     - icon: fontawesome/brands/github-alt
-      link: https://github.com/ChainSafe/ChainBridge
+      link: https://github.com/octopus-network/ChainBridge
