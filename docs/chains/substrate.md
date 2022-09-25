@@ -59,3 +59,9 @@ Compatible calls are restrained to the following signature to allow relayers to 
 
 *Note: Calls in substrate are resolved based on a pallet and call index. The pallet index depends on the ordering of pallets in the runtime, and the call index on the ordering of calls in the pallet. As these may change during a runtime upgrade, relayers should use the actual method name string to reference calls* 
 
+## ChainBridge Pallet
+The pallets related to chainbridge are placed in the project [octopu-pallets](https://github.com/octopus-network/octopus-pallets/tree/feature/add-chainbridge-v1).
+### chainbridge
+The core bridge logic. This handles voting and execution of proposals, administration of the relayer set and signaling transfers.
+### chainbridge-transfer
+This pallet demonstrates how the chainbridge pallet can be integrated in to a substrate chain. It implements calls that can be executed through proposal only and to initiate a basic transfer across the bridge.

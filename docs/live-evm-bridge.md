@@ -75,10 +75,11 @@ We will be creating a bridge that wraps the test ERC20 token WEENUS on Görli as
 We will be using the ChainBridge contract CLI to deploy and interact with the contracts. Grab and install the CLI by running: 
 
 ```shell
-git clone -b v1.0.0 --depth 1 https://github.com/ChainSafe/chainbridge-deploy \
-&& cd chainbridge-deploy/cb-sol-cli \
-&& npm install \
-&& make install
+git clone -b v1.0.0 --depth 1 https://github.com/octopus-network/chainbridge-deploy.git
+cd chainbridge-deploy
+git checkout oct-dev
+cd cb-sol-cli
+npm install && make install
 ```
 
 This will also download and build the required Solidity contracts.
