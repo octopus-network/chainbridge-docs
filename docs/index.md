@@ -14,7 +14,7 @@ Research is currently underway to reduce the levels of trust required and move t
 
 ## Relevant repos
 
-### [ChainBridge](https://github.com/octopus-network/ChainBridge)
+### [ChainBridge](https://github.com/octopus-network/ChainBridge/tree/oct-dev)
 This is the core bridging software that Relayers run between chains.
 
 ### [chainbridge-solidity](https://github.com/ChainSafe/chainbridge-solidity) 
@@ -26,5 +26,5 @@ A substrate pallet that can be integrated into a chain, as well as an example pa
 ### [chainbridge-utils](https://github.com/ChainSafe/chainbridge-utils)
 A collection of packages used by the core bridging software.
 
-### [chainbridge-deploy](https://github.com/octopus-network/chainbridge-deploy)
+### [chainbridge-deploy](https://github.com/octopus-network/chainbridge-deploy/tree/oct-dev)
 Some tooling to help with deployments.
