@@ -683,3 +683,12 @@ _Verify transfer of hash_:
 ```bash
 cb-sol-cli cent getHash --hash 0x699c776c7e6ce8e6d96d979b60e41135a13a2303ae1610c8d546f31f0c6dc730
 ```
+
+### Generic Data Eth => Substrate
+```bash
+cb-sol-cli generic deposit     \
+    --dest 1     \
+    --recipient "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d"     \
+    --resourceId 0x000000000000000000000000000000c76ebe4a02bbc34786d860b355f5a5ce00 --data 0xc0ffee
+```
+
