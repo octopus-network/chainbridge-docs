@@ -107,6 +107,19 @@ cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 10000000000 deploy
 export SRC_GN_HANDLER=0xD82EB76a09b8af49AfB936BA9F760b1a2606D028
 ```
 
+### Dploy Centriguge Asset for Generic Data Transfer
+
+```bash
+cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 10000000000 deploy \
+    --bridgeAddress $SRC_BRIDGE \
+    --centAsset \
+    --relayerThreshold 1 \
+    --chainId 0
+
+# Generic Handler:    0x672a4B60BF28Fe34ED26c5466de8782AAA9983b5
+export CENT_ASSET=0x672a4B60BF28Fe34ED26c5466de8782AAA9983b5
+```
+
 ### **Register Resources Ethereum 注册资源在以太坊**
 
 - **NOTE:** The below registrations will **not** notify you upon successful completion.
@@ -487,7 +500,7 @@ Steps to transfer an ERC-20 token:
 
 可以通过ChainbridgeAssets中的account方法查看所有的资产已经全部销毁转移到了evm 侧
 
-## generic data transfer substrate → EVM
+## generic data transfer  EVM → substrate
 
 ```bash
 node index.js --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 10000000000 generic deposit     \
@@ -496,6 +509,38 @@ node index.js --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 10000000000 gen
     --resourceId $GN_RESOURCE_ID --data 0xc0ffee
 ```
 
-```jsx
+## generic data transfer substrate → EVM
 
+register resourceId on EVM
+
+```bash
+export GN_RESOURCE2_ID=0x000000000000000000000000000000f44be64d2de895454c3467021928e55e00
+# cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 10000000000 bridge register-generic-resource \
+#     --bridge $SRC_BRIDGE \
+#     --handler $SRC_GN_HANDLER \
+#     --resourceId $GN_RESOURCE2_ID
+
+cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 10000000000 bridge register-generic-resource \
+    --bridge $SRC_BRIDGE \
+    --handler $SRC_GN_HANDLER \
+    --resourceId $GN_RESOURCE2_ID \
+    --targetContract $CENT_ASSET \
+    --hash \
+    --deposit "" \
+    --execute "store(bytes32)"
+```
+
+For this example we will transfer a 32 byte hash to a registry on Ethereum.
+
+Steps to transfer data to Ethereum:
+
+1. Select the `Extrinsics` tab in the PolkadotJS Portal
+2. Call `ChainBridgeTransfer.transferHash` with parameters such as these:
+    - Hash: `0x699c776c7e6ce8e6d96d979b60e41135a13a2303ae1610c8d546f31f0c6dc730`
+    - Dest ID: `0`
+
+*Verify transfer of hash*
+
+```bash
+cb-sol-cli --url $SRC_GATEWAY cent getHash --address $CENT_ASSET  --hash 0x699c776c7e6ce8e6d96d979b60e41135a13a2303ae1610c8d546f31f0c6dc730
 ```
