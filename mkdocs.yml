@@ -34,7 +34,9 @@ nav:
           - Configuration:
               - Overview: configuration.md
               - CLI Options: cli-options.md
-      - Running Locally (EVM <-> Sub): local.md
+      - Running Locally (EVM <-> Sub):
+          - EVM <-> Sub1: local1.md
+          - EVM <-> Sub2: local2.md
       - Deploying Live (EVM <-> EVM): live-evm-bridge.md
   - FAQ: faq.md
 
