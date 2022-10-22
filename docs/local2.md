@@ -367,27 +367,6 @@ cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 10000000000 bridge
     --targetContract $SRC2_TOKEN
 ```
 
-### **Specify Token Semantics 指定令牌语义**
-
-To allow for a variety of use cases, the Ethereum contracts support both the `transfer` and the `mint/burn` ERC methods.
-
-为了允许各种用例，以太坊合同支持转移和薄荷/燃烧ERC方法。
-
-*Register the erc20 contract as mintable/burnable:*
-
-```bash
-cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK --gasPrice 10000000000 bridge set-burn \
-    --bridge $SRC_BRIDGE \
-    --handler $SRC_HANDLER \
-    --tokenContract $SRC2_TOKEN
-```
-
-*Register the associated handler as a minter:*
-
-```bash
-cb-sol-cli --url $SRC_GATEWAY --privateKey $SRC_PK erc20 add-minter --erc20Address $SRC2_TOKEN --minter $SRC_HANDLER
-```
-
 ****On-Chain Setup (Substrate) 在substrate侧的配置****
 
 ### 创建跨链资产USDC
